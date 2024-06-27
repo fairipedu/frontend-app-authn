@@ -11,7 +11,10 @@ const LargeLayout = () => {
   const { formatMessage } = useIntl();
 
   return (
-    <div className="w-50 d-flex">
+    <></>
+  );
+};
+/*<div className="w-50 d-flex">
       <div className="col-md-9 bg-primary-400">
         <Hyperlink destination={getConfig().MARKETING_SITE_BASE_URL}>
           <Image className="logo position-absolute" alt={getConfig().SITE_NAME} src={getConfig().LOGO_WHITE_URL} />
@@ -38,8 +41,5 @@ const LargeLayout = () => {
           </g>
         </svg>
       </div>
-    </div>
-  );
-};
-
+    </div>*/
 export default LargeLayout;

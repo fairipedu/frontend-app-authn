@@ -5,7 +5,7 @@ import { getConfig } from '@edx/frontend-platform';
 import { sendPageEvent, sendTrackEvent } from '@edx/frontend-platform/analytics';
 import { injectIntl, useIntl } from '@edx/frontend-platform/i18n';
 import {
-  Form, StatefulButton,
+  Form, FormLabel, StatefulButton, CheckBox
 } from '@openedx/paragon';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
@@ -77,9 +77,9 @@ const LoginPage = (props) => {
   const [errors, setErrors] = useState({ ...backedUpFormData.errors });
   const tpaHint = getTpaHint();
 
-  useEffect(() => {
-    sendPageEvent('login_and_registration', 'login');
-  }, []);
+  // useEffect(() => {
+  //   sendPageEvent('login_and_registration', 'login');
+  // }, []);
 
   useEffect(() => {
     const payload = { ...queryParams };
@@ -202,14 +202,18 @@ const LoginPage = (props) => {
   return (
     <>
       <Helmet>
-        <title>*Login*{formatMessage(messages['login.page.title'], { siteName: getConfig().SITE_NAME })}</title>
+        <title>{formatMessage(messages['login.page.title'], { siteName: getConfig().SITE_NAME })}</title>
       </Helmet>
       <RedirectLogistration
         success={loginResult.success}
         redirectUrl={loginResult.redirectUrl}
         finishAuthUrl={finishAuthUrl}
       />
-      <div className="mw-xs mt-3 mb-2">
+      <div className="banner">
+        <img className="login-banner" alt={getConfig().SITE_NAME} src="{getConfig().LMS_BASE_URL}/static/indigo/images/login_banner.png" />
+      </div>
+      <div className="login-wrap mw-xs p-6">
+        <h1>Member Login</h1>
         <LoginFailureMessage
           errorCode={errorCode.type}
           errorCount={errorCode.count}
@@ -223,50 +227,66 @@ const LoginPage = (props) => {
           messageType={activationMsgType}
         />
         {showResetPasswordSuccessBanner && <ResetPasswordSuccess />}
+        
         <Form id="sign-in-form" name="sign-in-form">
-          <FormGroup
-            name="emailOrUsername"
-            value={formFields.emailOrUsername}
-            autoComplete="on"
-            handleChange={handleOnChange}
-            handleFocus={handleOnFocus}
-            errorMessage={errors.emailOrUsername}
-            floatingLabel={formatMessage(messages['login.user.identity.label'])}
-          />
-          <PasswordField
-            name="password"
-            value={formFields.password}
-            autoComplete="off"
-            showScreenReaderText={false}
-            showRequirements={false}
-            handleChange={handleOnChange}
-            handleFocus={handleOnFocus}
-            errorMessage={errors.password}
-            floatingLabel={formatMessage(messages['login.password.label'])}
-          />
-          <StatefulButton
-            name="sign-in"
-            id="sign-in"
-            type="submit"
-            variant="brand"
-            className="login-button-width"
-            state={submitState}
-            labels={{
-              default: formatMessage(messages['sign.in.button']),
-              pending: '',
-            }}
-            onClick={handleSubmit}
-            onMouseDown={(event) => event.preventDefault()}
-          />
-          <Link
-            id="forgot-password"
-            name="forgot-password"
-            className="btn btn-link font-weight-500 text-body"
-            to={updatePathWithQueryParams(RESET_PAGE)}
-            onClick={trackForgotPasswordLinkClick}
-          >
-            {formatMessage(messages['forgot.password'])}
-          </Link>
+          <ul>
+            <li>
+              <span className="icon"><i className="ri-user-line"></i></span>
+              <FormGroup
+                name="emailOrUsername"
+                value={formFields.emailOrUsername}
+                autoComplete="on"
+                handleChange={handleOnChange}
+                handleFocus={handleOnFocus}
+                errorMessage={errors.emailOrUsername}
+                floatingLabel={formatMessage(messages['login.user.identity.label'])}
+              />
+            </li>
+            <li>
+            <span className="icon"><i className="ri-lock-line"></i></span>
+              <PasswordField
+                name="password"
+                value={formFields.password}
+                autoComplete="off"
+                showScreenReaderText={false}
+                showRequirements={false}
+                handleChange={handleOnChange}
+                handleFocus={handleOnFocus}
+                errorMessage={errors.password}
+                floatingLabel={formatMessage(messages['login.password.label'])}
+              />
+            </li>
+            <li>
+              <CheckBox name="useridSave" className="userid-save-control" label="사용자 아이디 기억" />
+              
+              <Link
+                id="forgot-password"
+                name="forgot-password"
+                className="btn btn-link text-body forgot-password-control"
+                to={updatePathWithQueryParams(RESET_PAGE)}
+                onClick={trackForgotPasswordLinkClick}
+              >
+                {formatMessage(messages['forgot.password'])} <i className="ri-arrow-right-s-line"></i>
+              </Link>
+            </li>
+            <li className="border-0">
+              <StatefulButton
+                name="sign-in"
+                id="sign-in"
+                type="submit"
+                variant="brand"
+                className="login-button-width"
+                state={submitState}
+                labels={{
+                  default: formatMessage(messages['sign.in.button']),
+                  pending: '',
+                }}
+                onClick={handleSubmit}
+                onMouseDown={(event) => event.preventDefault()}
+              />
+            </li>
+          </ul>
+          
           <ThirdPartyAuth
             currentProvider={currentProvider}
             providers={providers}
