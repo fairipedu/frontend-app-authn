@@ -3,86 +3,86 @@ import { defineMessages } from '@edx/frontend-platform/i18n';
 const messages = defineMessages({
   'login.page.title': {
     id: 'login.page.title',
-    defaultMessage: 'Login | {siteName}',
+    defaultMessage: '로그인 | {siteName}',
     description: 'login page title',
   },
   // Login labels
   'login.user.identity.label': {
     id: 'login.user.identity.label',
-    defaultMessage: 'Username or email',
+    defaultMessage: '사용자아이디 또는 이메일',
     description: 'Label for user identity field to enter either username or email to login',
   },
   'login.password.label': {
     id: 'login.password.label',
-    defaultMessage: 'Password',
+    defaultMessage: '비밀번호',
     description: 'Label for password field',
   },
   'sign.in.button': {
     id: 'sign.in.button',
-    defaultMessage: 'Sign in',
+    defaultMessage: '로그인',
     description: 'Sign in button label that appears on login page',
   },
   'forgot.password': {
     id: 'forgot.password',
-    defaultMessage: 'Forgot password',
+    defaultMessage: '비밀번호찾기',
     description: 'Button text for forgot password',
   },
   'institution.login.button': {
     id: 'institution.login.button',
-    defaultMessage: 'Institution/campus credentials',
+    defaultMessage: '기관/대학 인증',
     description: 'shows institutions list',
   },
   'institution.login.page.title': {
     id: 'institution.login.page.title',
-    defaultMessage: 'Sign in with institution/campus credentials',
+    defaultMessage: '기관/대학 인증 로그인',
     description: 'Heading of institution page',
   },
   'institution.login.page.sub.heading': {
     id: 'institution.login.page.sub.heading',
-    defaultMessage: 'Choose your institution from the list below',
+    defaultMessage: '아래 목록에서 기관/대학을 선택하세요',
     description: 'Heading of the institutions list',
   },
   'non.compliant.password.title': {
     id: 'non.compliant.password.title',
-    defaultMessage: 'We recently changed our password requirements',
+    defaultMessage: '최근 비밀번호 요구 사항이 변경되었습니다',
     description: 'A title that appears in bold before error message for non-compliant password',
   },
   'non.compliant.password.message': {
     id: 'non.compliant.password.message',
-    defaultMessage: 'Your current password does not meet the new security requirements. '
-                    + 'We just sent a password-reset message to the email address associated with this account. '
-                    + 'Thank you for helping us keep your data safe.',
+    defaultMessage: '현재 비밀번호는 최근 변경된 보안 요구 사항을 충족하지 않습니다. '
+                    + '입력하신 계정과 연결된 이메일 주소로 비밀번호 재설정 메시지를 보냈습니다. '
+                    + '귀하의 데이터를 안전하게 유지하는 데 도움을 주셔서 감사합니다.',
     description: 'Error message for non-compliant password',
   },
   'account.locked.out.message.1': {
     id: 'account.locked.out.message.1',
-    defaultMessage: 'To protect your account, it\'s been temporarily locked. Try again in 30 minutes.',
+    defaultMessage: '계정이 일시적으로 잠겼습니다. 30분 후 다시 시도하세요 ',
     description: 'Part of message for when user account has been locked out after multiple failed login attempts',
   },
   'username.or.email.format.validation.less.chars.message': {
     id: 'username.or.email.format.validation.less.chars.message',
-    defaultMessage: 'Username or email must have at least 2 characters.',
+    defaultMessage: '사용자 이름이나 이메일은 2자 이상이어야 합니다.',
     description: 'Validation message that appears when username or email address is less than 2 characters',
   },
   'email.validation.message': {
     id: 'email.validation.message',
-    defaultMessage: 'Enter your username or email',
+    defaultMessage: '사용자아이디를 입력해주세요',
     description: 'Validation message that appears when email is empty',
   },
   'password.validation.message': {
     id: 'password.validation.message',
-    defaultMessage: 'Enter your password',
+    defaultMessage: '비밀번호를 입력해주세요',
     description: 'Validation message that appears when password is empty',
   },
   // Account Activation Strings
   'account.activation.success.message.title': {
     id: 'account.activation.success.message.title',
-    defaultMessage: 'Success! You have activated your account.',
+    defaultMessage: '계정이 활성화 되었습니다.',
     description: 'Account Activation success message title',
   },
   'account.activation.success.message': {
     id: 'account.activation.success.message',
-    defaultMessage: 'You will now receive email updates and alerts from us related to the courses you are enrolled in. Sign in to continue.',
+    defaultMessage: '등록한 강좌와 과련 이메일 업데이트 및 알림을 받게 됩니다. 계속하려면 로그인하세요.',
     description: 'Message show to learners when their account has been activated successfully',
   },
   'account.activation.info.message': {

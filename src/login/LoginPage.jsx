@@ -5,7 +5,9 @@ import { getConfig } from '@edx/frontend-platform';
 import { sendPageEvent, sendTrackEvent } from '@edx/frontend-platform/analytics';
 import { injectIntl, useIntl } from '@edx/frontend-platform/i18n';
 import {
-  Form, FormLabel, StatefulButton, CheckBox
+  Form, FormLabel, StatefulButton, CheckBox,
+  useCheckboxSetValues,
+  FormFile
 } from '@openedx/paragon';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
@@ -43,6 +45,9 @@ import {
   updatePathWithQueryParams,
 } from '../data/utils';
 import ResetPasswordSuccess from '../reset-password/ResetPasswordSuccess';
+import { passwordResetFailure } from '../reset-password/data/actions';
+
+import { setCookie, getCookie, removeCookie } from '../data/utils';
 
 const LoginPage = (props) => {
   const {
@@ -76,11 +81,12 @@ const LoginPage = (props) => {
   const [errorCode, setErrorCode] = useState({ type: '', count: 0, context: {} });
   const [errors, setErrors] = useState({ ...backedUpFormData.errors });
   const tpaHint = getTpaHint();
-
+  const [cookies, setCookies] = useState({cookieName : 'save_userid', cookieValue : getCookie('save_userid')});
+  
   // useEffect(() => {
   //   sendPageEvent('login_and_registration', 'login');
   // }, []);
-
+  
   useEffect(() => {
     const payload = { ...queryParams };
     if (tpaHint) {
@@ -97,6 +103,7 @@ const LoginPage = (props) => {
         formFields: { ...formFields },
         errors: { ...errors },
       });
+      
     }
   }, [shouldBackupState, formFields, errors, backupFormState]);
 
@@ -121,7 +128,22 @@ const LoginPage = (props) => {
       }));
     }
   }, [thirdPartyErrorMessage]);
+  
+  useEffect(() => {
+    if(cookies.cookieValue) {
+      formFields.emailOrUsername = cookies.cookieValue;
+      formFields.useridSave = true;
+    }
+  }, []);
 
+  const handleSetCookies = (saveName, saveValue) => {
+    if(saveName) {
+      const setValue = {name : saveName, value : saveValue}
+      setCookies(setValue);
+      setCookie(saveName, saveValue);
+    }
+  };
+  
   const validateFormFields = (payload) => {
     const { emailOrUsername, password } = payload;
     const fieldErrors = { ...errors };
@@ -134,11 +156,13 @@ const LoginPage = (props) => {
     if (password === '') {
       fieldErrors.password = formatMessage(messages['password.validation.message']);
     }
+    
 
     return { ...fieldErrors };
   };
-
+  
   const handleSubmit = (event) => {
+    
     event.preventDefault();
     if (showResetPasswordSuccessBanner) {
       props.dismissPasswordResetBanner();
@@ -151,19 +175,29 @@ const LoginPage = (props) => {
       setErrorCode(prevState => ({ type: INVALID_FORM, count: prevState.count + 1, context: {} }));
       return;
     }
-
+    console.log(formData.useridSave);
+    if(formData.useridSave) {
+      handleSetCookies('save_userid', formData.emailOrUsername);
+    } else {
+      handleSetCookies('save_userid', '');
+    }
+    
     // add query params to the payload
     const payload = {
       email_or_username: formData.emailOrUsername,
       password: formData.password,
+      useridSave : formData.useridSave,
       ...queryParams,
     };
     props.loginRequest(payload);
   };
-
+  
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     setFormFields(prevState => ({ ...prevState, [name]: value }));
+  };
+  const handleOnChangeCheckbox = (event, fieldName) => {
+    setFormFields(prevState => ({ ...prevState, [fieldName]: event }));
   };
 
   const handleOnFocus = (event) => {
@@ -175,7 +209,7 @@ const LoginPage = (props) => {
   };
 
   const { provider, skipHintedLogin } = getTpaProvider(tpaHint, providers, secondaryProviders);
-
+  
   if (tpaHint) {
     if (thirdPartyAuthApiStatus === PENDING_STATE) {
       return <Skeleton height={36} />;
@@ -199,6 +233,7 @@ const LoginPage = (props) => {
       />
     );
   }
+  
   return (
     <>
       <Helmet>
@@ -210,7 +245,7 @@ const LoginPage = (props) => {
         finishAuthUrl={finishAuthUrl}
       />
       <div className="banner">
-        <img className="login-banner" alt={getConfig().SITE_NAME} src="{getConfig().LMS_BASE_URL}/static/indigo/images/login_banner.png" />
+        <img className="login-banner" alt={getConfig().SITE_NAME} src="../images/login_banner.png" />
       </div>
       <div className="login-wrap mw-xs p-6">
         <h1>Member Login</h1>
@@ -230,7 +265,7 @@ const LoginPage = (props) => {
         
         <Form id="sign-in-form" name="sign-in-form">
           <ul>
-            <li>
+            <li className="fixHeight">
               <span className="icon"><i className="ri-user-line"></i></span>
               <FormGroup
                 name="emailOrUsername"
@@ -241,6 +276,7 @@ const LoginPage = (props) => {
                 errorMessage={errors.emailOrUsername}
                 floatingLabel={formatMessage(messages['login.user.identity.label'])}
               />
+              
             </li>
             <li>
             <span className="icon"><i className="ri-lock-line"></i></span>
@@ -256,8 +292,9 @@ const LoginPage = (props) => {
                 floatingLabel={formatMessage(messages['login.password.label'])}
               />
             </li>
-            <li>
-              <CheckBox name="useridSave" className="userid-save-control" label="사용자 아이디 기억" />
+            
+            <li className="border-0">
+              <CheckBox name="useridSave" className="userid-save-control" value="1" checked={formFields.useridSave} label="사용자 아이디 기억"  onChange={(e) => handleOnChangeCheckbox(e, 'useridSave')}  />
               
               <Link
                 id="forgot-password"
@@ -355,7 +392,7 @@ LoginPage.propTypes = {
 LoginPage.defaultProps = {
   backedUpFormData: {
     formFields: {
-      emailOrUsername: '', password: '',
+      emailOrUsername: '', password: '', useridSave:false
     },
     errors: {
       emailOrUsername: '', password: '',

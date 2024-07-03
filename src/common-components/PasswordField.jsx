@@ -132,7 +132,7 @@ const PasswordField = (props) => {
           onChange={props.handleChange}
           controlClassName={props.borderClass}
           trailingElement={isPasswordHidden ? ShowButton : HideButton}
-          floatingLabel={props.floatingLabel}
+          placeholder={props.floatingLabel}
         />
       </OverlayTrigger>
       {props.errorMessage !== '' && (

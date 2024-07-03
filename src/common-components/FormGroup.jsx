@@ -38,7 +38,7 @@ const FormGroup = (props) => {
         onChange={props.handleChange}
         controlClassName={props.borderClass}
         trailingElement={props.trailingElement}
-        floatingLabel={props.floatingLabel}
+        placeholder={props.floatingLabel}
       >
         {props.options ? props.options() : null}
       </Form.Control>

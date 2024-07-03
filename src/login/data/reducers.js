@@ -12,7 +12,7 @@ export const defaultState = {
   loginResult: {},
   loginFormData: {
     formFields: {
-      emailOrUsername: '', password: '',
+      emailOrUsername: '', password: '', useridSave: false
     },
     errors: {
       emailOrUsername: '', password: '',
