@@ -3,13 +3,13 @@ import { defineMessages } from '@edx/frontend-platform/i18n';
 const messages = defineMessages({
   'register.page.title': {
     id: 'register.page.title',
-    defaultMessage: 'Register | {siteName}',
+    defaultMessage: '회원가입 | {siteName}',
     description: 'register page title',
   },
   // Field labels
   'registration.fullname.label': {
     id: 'registration.fullname.label',
-    defaultMessage: 'Full name',
+    defaultMessage: '이름',
     description: 'Label that appears above fullname field',
   },
   'registration.email.label': {
@@ -19,49 +19,49 @@ const messages = defineMessages({
   },
   'registration.username.label': {
     id: 'registration.username.label',
-    defaultMessage: 'Public username',
+    defaultMessage: '아이디',
     description: 'Label that appears above username field',
   },
   'registration.password.label': {
     id: 'registration.password.label',
-    defaultMessage: 'Password',
+    defaultMessage: '비밀번호',
     description: 'Label that appears above password field',
   },
   'registration.country.label': {
     id: 'registration.country.label',
-    defaultMessage: 'Country/Region',
+    defaultMessage: '국가',
     description: 'Placeholder for the country options dropdown.',
   },
   'registration.opt.in.label': {
     id: 'registration.opt.in.label',
-    defaultMessage: 'I agree that {siteName} may send me marketing messages.',
+    defaultMessage: '마케팅 소식 알림에 동의합니다.',
     description: 'Text for opt in option on register page.',
   },
   // Help text
   'help.text.name': {
     id: 'help.text.name',
-    defaultMessage: 'This name will be used by any certificates that you earn.',
+    defaultMessage: '이름(인증서에 기재됩니다)',
     description: 'Help text for fullname field on registration page',
   },
   'help.text.username.1': {
     id: 'help.text.username.1',
-    defaultMessage: 'The name that will identify you in your courses.',
+    defaultMessage: '사용자 아이디',
     description: 'Part of help text for username field on registration page',
   },
   'help.text.username.2': {
     id: 'help.text.username.2',
-    defaultMessage: 'This can not be changed later.',
+    defaultMessage: '추후 변경할 수 없습니다.',
     description: 'Part of help text for username field on registration page',
   },
   'help.text.email': {
     id: 'help.text.email',
-    defaultMessage: 'For account activation and important updates',
+    defaultMessage: '계정 활성화 및 중요 업데이트를 기재하신 메일로 보내드립니다.',
     description: 'Help text for email field on registration page',
   },
   // Form buttons
   'create.account.for.free.button': {
     id: 'create.account.for.free.button',
-    defaultMessage: 'Create an account for free',
+    defaultMessage: '회원가입',
     description: 'Label text for registration form submission button',
   },
   'create.account.cta.button': {
@@ -72,43 +72,43 @@ const messages = defineMessages({
   // Institution login
   'register.institution.login.page.title': {
     id: 'register.institution.login.page.title',
-    defaultMessage: 'Register with institution/campus credentials',
+    defaultMessage: '단체 자격 증명으로 등록',
     description: 'Heading of institution page',
   },
   // Validation messages
   'empty.name.field.error': {
     id: 'empty.name.field.error',
-    defaultMessage: 'Enter your full name',
+    defaultMessage: '이름을 입력해 주세요',
     description: 'Error message for empty fullname field',
   },
   'empty.email.field.error': {
     id: 'empty.email.field.error',
-    defaultMessage: 'Enter your email',
+    defaultMessage: 'Email을 입력해 주세요',
     description: 'Error message for empty email field',
   },
   'empty.username.field.error': {
     id: 'empty.username.field.error',
-    defaultMessage: 'Username must be between 2 and 30 characters',
+    defaultMessage: '아이디는 2~30자 이내로 입력해 주세요',
     description: 'Error message for empty username field',
   },
   'empty.password.field.error': {
     id: 'empty.password.field.error',
-    defaultMessage: 'Password criteria has not been met',
+    defaultMessage: '비밀번호 기준이 충족되지 않았습니다.',
     description: 'Error message for empty password field',
   },
   'empty.country.field.error': {
     id: 'empty.country.field.error',
-    defaultMessage: 'Select your country or region of residence',
+    defaultMessage: '거주 국가를 선택해주세요',
     description: 'Error message when no country/region is selected',
   },
   'invalid.country.field.error': {
     id: 'invalid.country.field.error',
-    defaultMessage: 'Country must match with an option available in the dropdown.',
+    defaultMessage: '사용가능한 국가 옵션이 아닙니다.',
     description: 'Error message when country is invalid',
   },
   'email.do.not.match': {
     id: 'email.do.not.match',
-    defaultMessage: 'The email addresses do not match.',
+    defaultMessage: '이메일 주소가 일치하지 않습니다.',
     description: 'Email not match to confirm email',
   },
   'email.invalid.format.error': {
