@@ -237,7 +237,7 @@ const LoginPage = (props) => {
   return (
     <>
       <Helmet>
-        <title>{formatMessage(messages['login.page.title'], { siteName: getConfig().SITE_NAME })}</title>
+        <title> ONEUN {formatMessage(messages['login.page.title'], { siteName: getConfig().SITE_NAME })}</title>
       </Helmet>
       <RedirectLogistration
         success={loginResult.success}
@@ -245,7 +245,7 @@ const LoginPage = (props) => {
         finishAuthUrl={finishAuthUrl}
       />
       <div className="banner">
-        <img className="login-banner" alt={getConfig().SITE_NAME} src="../images/login_banner.png" />
+        <img className="login-banner" alt={getConfig().SITE_NAME} src={`${getConfig().LMS_BASE_URL}/theming/asset/images/theme_login_banner.png`} />
       </div>
       <div className="login-wrap mw-xs p-6">
         <h1>Member Login</h1>
